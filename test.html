@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Are You Hackable? | Anugrah Academy</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;500&display=swap');
+        body { background-color: #050505; color: #00ff41; font-family: 'Fira Code', monospace; padding: 20px; }
+        .test-card { border: 1px solid #00ff41; background: rgba(0, 255, 65, 0.05); padding: 30px; border-radius: 10px; max-width: 600px; margin: auto; }
+        .choice-btn { display: block; width: 100%; border: 1px solid #00ff41; padding: 15px; margin-top: 15px; text-align: left; transition: 0.3s; cursor: pointer; }
+        .choice-btn:hover { background: #00ff41; color: black; box-shadow: 0 0 15px #00ff41; }
+        .hidden { display: none; }
+    </style>
+</head>
+<body>
+
+    <nav class="mb-10 flex justify-between">
+        <a href="index.html" class="text-sm border border-green-900 px-4 py-1 hover:bg-green-900 transition"><i class="fas fa-arrow-left"></i> KEMBALI</a>
+        <div class="text-sm text-gray-500">SYSTEM_DIAGNOSTIC: SECURITY_CHECK</div>
+    </nav>
+
+    <div id="quiz-container" class="test-card">
+        <div id="question-box">
+            <h2 id="q-text" class="text-xl font-bold mb-6 text-white leading-tight">Menganalisa sistem...</h2>
+            <div id="choices"></div>
+        </div>
+        
+        <div id="result-box" class="hidden text-center">
+            <h2 class="text-3xl font-bold mb-4 text-white">TEST SELESAI</h2>
+            <p id="rank-text" class="text-2xl mb-6 font-black uppercase underline"></p>
+            <p id="desc-text" class="text-gray-400 text-sm mb-8"></p>
+            <button onclick="location.reload()" class="bg-white text-black px-6 py-2 font-bold">ULANGI TEST</button>
+        </div>
+    </div>
+
+    <script>
+        const questions = [
+            {
+                q: "Skenario 1: Kamu menerima pesan WA dari nomor tak dikenal yang mengirimkan file 'Undangan_Pernikahan.apk'. Apa yang kamu lakukan?",
+                c: [
+                    { t: "Download dan install untuk melihat isinya.", v: 0 },
+                    { t: "Hapus pesan dan blokir nomornya segera.", v: 10 },
+                    { t: "Tanya balik: 'Ini siapa?' baru install.", v: 2 }
+                ]
+            },
+            {
+                q: "Skenario 2: Kamu menemukan flashdisk tergeletak di depan rumah. Bagaimana tindakanmu?",
+                c: [
+                    { t: "Colok ke laptop untuk mencari tahu pemiliknya.", v: 0 },
+                    { t: "Abaikan atau buang ke tempat sampah.", v: 10 },
+                    { t: "Colok ke komputer kantor yang anti-virusnya kuat.", v: 1 }
+                ]
+            },
+            {
+                q: "Skenario 3: Kamu ingin login ke Facebook, tapi URL-nya adalah 'facebok-login.com'. Apa reaksimu?",
+                c: [
+                    { t: "Tetap login, mungkin cuma update domain.", v: 0 },
+                    { t: "Tutup tab, itu jelas link phishing.", v: 10 },
+                    { t: "Coba masukin password asal dulu buat ngetes.", v: 3 }
+                ]
+            }
+        ];
+
+        let currentQ = 0;
+        let totalScore = 0;
+
+        function loadQuestion() {
+            const qBox = document.getElementById('q-text');
+            const cBox = document.getElementById('choices');
+            cBox.innerHTML = '';
+            
+            qBox.innerText = questions[currentQ].q;
+            questions[currentQ].c.forEach(choice => {
+                const btn = document.createElement('div');
+                btn.className = 'choice-btn';
+                btn.innerText = choice.t;
+                btn.onclick = () => nextQuestion(choice.v);
+                cBox.appendChild(btn);
+            });
+        }
+
+        function nextQuestion(val) {
+            totalScore += val;
+            currentQ++;
+            if (currentQ < questions.length) {
+                loadQuestion();
+            } else {
+                showResult();
+            }
+        }
+
+        function showResult() {
+            document.getElementById('question-box').classList.add('hidden');
+            const rBox = document.getElementById('result-box');
+            rBox.classList.remove('hidden');
+            
+            const rank = document.getElementById('rank-text');
+            const desc = document.getElementById('desc-text');
+
+            if (totalScore >= 30) {
+                rank.innerText = "Cyber Guard 🛡️";
+                rank.className = "text-2xl mb-6 font-black uppercase text-green-400";
+                desc.innerText = "Selamat Bos! Kesadaran cyber kamu sangat tinggi. Kamu sulit untuk diretas!";
+            } else if (totalScore >= 15) {
+                rank.innerText = "Average User 👤";
+                rank.className = "text-2xl mb-6 font-black uppercase text-yellow-400";
+                desc.innerText = "Kamu cukup waspada, tapi masih ada celah yang bisa dimanfaatkan hacker.";
+            } else {
+                rank.innerText = "Easy Target 💀";
+                rank.className = "text-2xl mb-6 font-black uppercase text-red-500";
+                desc.innerText = "Gawat! Kamu sangat mudah kena tipu daya hacker. Perbanyak belajar di Anugrah Academy!";
+            }
+        }
+
+        loadQuestion();
+    </script>
+</body>
+</html>
