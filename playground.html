@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terminal Playground | Anugrah Academy</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;500&display=swap');
+        body { background-color: #050505; color: #00ff41; font-family: 'Fira Code', monospace; padding: 20px; }
+        #terminal { background: rgba(0, 20, 0, 0.9); border: 1px solid #00ff41; height: 70vh; overflow-y: auto; padding: 20px; border-radius: 5px; box-shadow: 0 0 20px rgba(0, 255, 65, 0.2); }
+        .input-line { display: flex; gap: 10px; margin-top: 10px; }
+        #cmd-input { background: transparent; border: none; outline: none; color: white; width: 100%; }
+        .output { margin-bottom: 5px; white-space: pre-wrap; }
+        .prompt { color: #00ff41; font-weight: bold; }
+        .system-msg { color: #888; font-style: italic; }
+        ::-webkit-scrollbar { width: 5px; }
+        ::-webkit-scrollbar-thumb { background: #00ff41; }
+    </style>
+</head>
+<body>
+
+    <nav class="mb-6 flex justify-between">
+        <a href="index.html" class="text-sm border border-green-900 px-4 py-1 hover:bg-green-900 transition"><i class="fas fa-arrow-left"></i> KEMBALI</a>
+        <div class="text-sm font-bold">ANUGRAH_TERMINAL_V1.0.sh</div>
+    </nav>
+
+    <div id="terminal">
+        <div class="output system-msg">Welcome to Anugrah Cyber Playground.</div>
+        <div class="output system-msg">Type 'help' to see available commands.</div>
+        <div id="history"></div>
+        <div class="input-line">
+            <span class="prompt">anugrah@academy:~$</span>
+            <input type="text" id="cmd-input" autofocus autocomplete="off">
+        </div>
+    </div>
+
+    <script>
+        const input = document.getElementById('cmd-input');
+        const history = document.getElementById('history');
+        const terminal = document.getElementById('terminal');
+
+        const commands = {
+            'help': 'Available commands: \n- help: Show this menu\n- ls: List modules\n- whoami: User info\n- clear: Clear terminal\n- hack --target: Start simulated attack',
+            'ls': 'Modules found: \n- basic_security.pkg\n- web_vuln_scanner.exe\n- journey_story.txt',
+            'whoami': 'You are currently logged in as [Guest_User]. \nAdmin: Anugrah Louis Apriliano.',
+            'clear': 'CLEAR',
+            'hack --target': 'Starting simulation...\n[##########] 100% COMPLETE\nStatus: TARGET BYPASSED.\nNote: This is just a simulation. Real hacking requires ethics!'
+        };
+
+        input.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') {
+                const cmd = input.value.trim().toLowerCase();
+                
+                // Add command to history
+                const line = document.createElement('div');
+                line.innerHTML = `<span class="prompt">anugrah@academy:~$</span> <span class="text-white">${cmd}</span>`;
+                history.appendChild(line);
+
+                // Process response
+                if (cmd === 'clear') {
+                    history.innerHTML = '';
+                } else if (commands[cmd]) {
+                    const output = document.createElement('div');
+                    output.className = 'output mt-2 text-blue-300';
+                    output.innerText = commands[cmd];
+                    history.appendChild(output);
+                } else if (cmd !== "") {
+                    const error = document.createElement('div');
+                    error.className = 'output text-red-500';
+                    error.innerText = `Command not found: ${cmd}. Type 'help' for info.`;
+                    history.appendChild(error);
+                }
+
+                input.value = '';
+                terminal.scrollTop = terminal.scrollHeight;
+            }
+        });
+
+        // Keep input focused
+        document.addEventListener('click', () => input.focus());
+    </script>
+</body>
+</html>
