@@ -9,68 +9,59 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;500&display=swap');
         :root { --main-green: #00ff41; --darker: #050505; }
-        body { background-color: var(--darker); color: var(--main-green); font-family: 'Fira Code', monospace; }
+        body { background-color: var(--darker); color: var(--main-green); font-family: 'Fira Code', monospace; scroll-behavior: smooth; }
         .nav-link:hover { text-shadow: 0 0 10px var(--main-green); color: white; }
         .cyber-border { border: 1px solid rgba(0, 255, 65, 0.3); background: rgba(0, 20, 0, 0.4); }
-        .journey-line { border-left: 2px solid var(--main-green); }
-        .btn-action { border: 1px solid var(--main-green); transition: 0.3s; }
-        .btn-action:hover { background: var(--main-green); color: black; box-shadow: 0 0 20px var(--main-green); }
+        .btn-cyber { border: 1px solid var(--main-green); color: var(--main-green); text-transform: uppercase; letter-spacing: 2px; transition: 0.3s; }
+        .btn-cyber:hover { background: var(--main-green); color: black; box-shadow: 0 0 20px var(--main-green); }
+        .glow-text { text-shadow: 0 0 10px var(--main-green); }
     </style>
 </head>
 <body class="overflow-x-hidden">
 
     <nav class="p-5 border-b border-green-900 bg-black/90 sticky top-0 z-50 flex justify-between items-center">
-        <div class="text-xl font-bold tracking-widest">ANUGRAH<span class="text-white">.ACADEMY</span></div>
+        <div class="text-xl font-bold tracking-widest glow-text">ANUGRAH<span class="text-white">.ACADEMY</span></div>
         <div class="hidden md:flex space-x-8 text-sm">
             <a href="index.html" class="nav-link">HOME</a>
             <a href="#roadmap" class="nav-link">ROADMAP</a>
             <a href="playground.html" class="nav-link">PLAYGROUND</a>
             <a href="challenge.html" class="nav-link">CHALLENGES</a>
         </div>
-        <div class="md:hidden"><i class="fas fa-bars"></i></div>
     </nav>
 
     <section class="min-h-screen flex flex-col justify-center items-center p-6 text-center">
-        <div class="mb-6 opacity-50">STORY_OF_STRUGGLE.exe</div>
-        <h1 class="text-4xl md:text-6xl font-bold mb-6 text-white uppercase tracking-tighter">Dari <span class="text-green-500">Nol</span> Menjadi <span class="text-green-500">Cyber Warrior</span></h1>
-        <p class="max-w-3xl text-gray-400 mb-8 leading-relaxed">
-            Mulai belajar hanya bermodalkan HP Android tua dan koneksi seadanya. Melewati ribuan "Command Not Found" di Termux, diremehkan, hingga akhirnya membangun platform ini untuk membantu kamu belajar Cybersecurity secara <span class="text-white font-bold underline">Gratis & Interaktif</span>.
+        <h1 class="text-4xl md:text-6xl font-bold mb-6 text-white uppercase tracking-tighter glow-text">The Journey of <span class="text-green-500">Anugrah</span></h1>
+        <p class="max-w-3xl text-gray-400 mb-8 leading-relaxed italic text-sm">
+            "Mulai dari HP Android tua, melewati ribuan kegagalan, hingga membangun sistem ini untuk kalian."
         </p>
         <div class="flex flex-wrap justify-center gap-4">
-            <a href="#roadmap" class="btn-action px-10 py-3 font-bold uppercase">Mulai Belajar</a>
-            <a href="https://github.com/anugerahlouisapriliano-dev" class="px-10 py-3 bg-white text-black font-bold uppercase hover:bg-green-500 transition">Follow GitHub</a>
+            <a href="#roadmap" class="btn-cyber px-10 py-3 font-bold">Mulai Belajar</a>
         </div>
     </section>
 
     <section id="roadmap" class="py-20 container mx-auto px-6">
-        <h2 class="text-3xl font-bold mb-12 flex items-center"><i class="fas fa-map-signs mr-4"></i> LEARNING ROADMAP</h2>
+        <h2 class="text-3xl font-bold mb-12 flex items-center glow-text"><i class="fas fa-map-signs mr-4"></i> LEARNING ROADMAP</h2>
         
         <div class="grid md:grid-cols-3 gap-8">
-            <div class="cyber-border p-8 rounded-tr-3xl relative overflow-hidden">
+            <div class="cyber-border p-8 rounded-tr-3xl relative">
                 <div class="text-5xl font-bold opacity-10 absolute right-4 top-4">01</div>
                 <h3 class="text-xl font-bold mb-4 text-white">BASIC SECURITY</h3>
-                <ul class="text-sm space-y-3 text-gray-400">
-                    <li><i class="fas fa-check-circle mr-2 text-green-500"></i> Apa itu Cybersecurity?</li>
-                    <li><i class="fas fa-check-circle mr-2 text-green-500 text-opacity-30"></i> Networking (IP, DNS, Port)</li>
-                    <li><i class="fas fa-check-circle mr-2 text-green-500 text-opacity-30"></i> Linux & Termux Dasar</li>
-                </ul>
-                <button class="mt-6 text-xs border border-green-900 px-4 py-2 hover:bg-green-900 transition">VIEW MODULE</button>
+                <p class="text-xs text-gray-400 mb-6 italic">Belajar dasar Linux, Termux, dan Networking.</p>
+                <a href="playground.html" class="btn-cyber block text-center py-3 text-xs font-bold">Mulai Playground</a>
             </div>
 
-            <div class="cyber-border p-8 rounded-tr-3xl relative opacity-50">
+            <div class="cyber-border p-8 rounded-tr-3xl relative">
                 <div class="text-5xl font-bold opacity-10 absolute right-4 top-4">02</div>
-                <h3 class="text-xl font-bold mb-4 text-white">WEB SECURITY</h3>
-                <p class="text-xs mb-4 italic">Learn how web vulnerabilities work.</p>
-                <div class="w-full bg-green-900/20 h-1 mt-2"></div>
-                <div class="mt-4 text-[10px] text-gray-500 uppercase font-bold text-right">Status: Locked</div>
+                <h3 class="text-xl font-bold mb-4 text-white">CTF CHALLENGES</h3>
+                <p class="text-xs text-gray-400 mb-6 italic">Uji kemampuan decode dan logika hacking kamu.</p>
+                <a href="challenge.html" class="btn-cyber block text-center py-3 text-xs font-bold">Buka Misi</a>
             </div>
 
-            <div class="cyber-border p-8 rounded-tr-3xl relative opacity-50">
+            <div class="cyber-border p-8 rounded-tr-3xl relative">
                 <div class="text-5xl font-bold opacity-10 absolute right-4 top-4">03</div>
-                <h3 class="text-xl font-bold mb-4 text-white">ETHICAL HACKER</h3>
-                <p class="text-xs mb-4 italic">Scanning, Recon, and Workflow.</p>
-                <div class="w-full bg-green-900/20 h-1 mt-2"></div>
-                <div class="mt-4 text-[10px] text-gray-500 uppercase font-bold text-right">Status: Locked</div>
+                <h3 class="text-xl font-bold mb-4 text-white">SECURITY TEST</h3>
+                <p class="text-xs text-gray-400 mb-6 italic">Apakah kamu mudah diretas? Cek di sini.</p>
+                <a href="test.html" class="btn-cyber block text-center py-3 text-xs font-bold">Uji Keamanan</a>
             </div>
         </div>
     </section>
