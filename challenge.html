@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Challenges | Anugrah Academy</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;500&display=swap');
+        body { background-color: #050505; color: #00ff41; font-family: 'Fira Code', monospace; padding: 20px; }
+        .challenge-card { border: 1px solid #00ff41; background: rgba(0, 40, 0, 0.2); padding: 20px; margin-bottom: 20px; border-radius: 8px; }
+        input { background: #000; border: 1px solid #00ff41; padding: 5px 10px; color: white; width: 100%; outline: none; margin-top: 10px; }
+        .btn-check { background: #00ff41; color: #000; font-weight: bold; padding: 8px 15px; margin-top: 10px; cursor: pointer; border: none; }
+        .btn-check:hover { background: white; }
+    </style>
+</head>
+<body>
+
+    <nav class="mb-8 flex justify-between items-center">
+        <a href="index.html" class="text-sm border border-green-900 px-4 py-1 hover:bg-green-900 transition"><i class="fas fa-arrow-left"></i> KEMBALI</a>
+        <div class="text-lg font-bold">TOTAL SCORE: <span id="total-score" class="text-white">0</span></div>
+    </nav>
+
+    <h1 class="text-3xl font-bold mb-8 text-white uppercase tracking-tighter">Cyber Mission Center</h1>
+
+    <div class="challenge-card">
+        <h3 class="text-xl font-bold mb-2">MISSION 01: THE SECRET MESSAGE</h3>
+        <p class="text-gray-400 text-sm">Target telah mengirimkan pesan terenkripsi. Decode pesan ini untuk mendapatkan akses!</p>
+        <div class="bg-black p-3 mt-4 text-center font-bold tracking-widest border border-dashed border-green-500">
+            QW51Z3JhaC1EZXY=
+        </div>
+        <input type="text" id="ans1" placeholder="Masukkan hasil decode di sini...">
+        <button class="btn-check" onclick="checkAnswer(1, 'Anugrah-Dev')">SUBMIT DATA</button>
+        <p id="feedback1" class="mt-2 text-xs"></p>
+    </div>
+
+    <div class="challenge-card">
+        <h3 class="text-xl font-bold mb-2">MISSION 02: CYBER AWARENESS</h3>
+        <p class="text-gray-400 text-sm">Apa istilah untuk serangan yang mencoba memecahkan password dengan mencoba semua kombinasi karakter?</p>
+        <input type="text" id="ans2" placeholder="Jawaban kamu...">
+        <button class="btn-check" onclick="checkAnswer(2, 'brute force')">SUBMIT DATA</button>
+        <p id="feedback2" class="mt-2 text-xs"></p>
+    </div>
+
+    <script>
+        let score = parseInt(localStorage.getItem('cyberScore')) || 0;
+        document.getElementById('total-score').innerText = score;
+
+        function checkAnswer(id, correct) {
+            let input = document.getElementById('ans' + id).value.toLowerCase().trim();
+            let feedback = document.getElementById('feedback' + id);
+
+            if (input === correct.toLowerCase()) {
+                if (!localStorage.getItem('done' + id)) {
+                    score += 100;
+                    localStorage.setItem('cyberScore', score);
+                    localStorage.setItem('done' + id, true);
+                    document.getElementById('total-score').innerText = score;
+                }
+                feedback.innerText = "✓ ACCESS GRANTED! +100 Point";
+                feedback.className = "mt-2 text-xs text-green-400 font-bold";
+            } else {
+                feedback.innerText = "✗ ACCESS DENIED! Coba lagi.";
+                feedback.className = "mt-2 text-xs text-red-500";
+            }
+        }
+    </script>
+</body>
+</html>
